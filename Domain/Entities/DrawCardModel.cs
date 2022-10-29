@@ -7,6 +7,6 @@ namespace Deck_of_Cards.Domain.Entities
 {
     public class DrawCardModel
     {
-        public Card[] cards { get; set; }
+        public Card[] Cards { get; set; }
     }
 }
