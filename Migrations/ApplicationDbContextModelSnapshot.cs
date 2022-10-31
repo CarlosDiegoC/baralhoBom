@@ -21,13 +21,17 @@ namespace Deck_of_Cards.Migrations
 
             modelBuilder.Entity("Deck_of_Cards.Domain.Entities.Card", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
                     b.Property<string>("Code")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Image")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("PlayerId")
+                    b.Property<int>("PlayerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Suit")
@@ -36,27 +40,11 @@ namespace Deck_of_Cards.Migrations
                     b.Property<string>("Value")
                         .HasColumnType("longtext");
 
-                    b.HasKey("Code");
+                    b.HasKey("Id");
 
                     b.HasIndex("PlayerId");
 
                     b.ToTable("Cards");
-                });
-
-            modelBuilder.Entity("Deck_of_Cards.Domain.Entities.Deck", b =>
-                {
-                    b.Property<string>("Deck_id")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<int>("Remaining")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Shuffled")
-                        .HasColumnType("tinyint(1)");
-
-                    b.HasKey("Deck_id");
-
-                    b.ToTable("Decks");
                 });
 
             modelBuilder.Entity("Deck_of_Cards.Domain.Entities.Game", b =>
@@ -65,8 +53,8 @@ namespace Deck_of_Cards.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("DeckId")
-                        .HasColumnType("longtext");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int?>("WinnerId")
                         .HasColumnType("int");
@@ -87,6 +75,9 @@ namespace Deck_of_Cards.Migrations
                     b.Property<int?>("GameId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
                     b.Property<int>("Points")
                         .HasColumnType("int");
 
@@ -101,7 +92,9 @@ namespace Deck_of_Cards.Migrations
                 {
                     b.HasOne("Deck_of_Cards.Domain.Entities.Player", null)
                         .WithMany("Cards")
-                        .HasForeignKey("PlayerId");
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Deck_of_Cards.Domain.Entities.Game", b =>

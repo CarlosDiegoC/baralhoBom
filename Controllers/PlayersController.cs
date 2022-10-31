@@ -1,4 +1,5 @@
 using Deck_of_Cards.Domain.Entities;
+using Deck_of_Cards.DTO;
 using Deck_of_Cards.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,9 +16,9 @@ namespace Deck_of_Cards.Controllers
         }
 
         [HttpPost]
-        public async Task<Player> CreatePlayer(Player player)
+        public async Task<Player> CreatePlayer(CreateANewPlayer playerDTO)
         {
-            return await _playerRepository.CreatePlayer(player);
+            return await _playerRepository.CreatePlayer(playerDTO);
         }
 
         [HttpGet]

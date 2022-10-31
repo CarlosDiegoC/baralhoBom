@@ -1,4 +1,5 @@
 using Deck_of_Cards.Context;
+using Deck_of_Cards.DTO;
 using Deck_of_Cards.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,8 @@ builder.Services.AddCors();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<PlayerRepository>();
+builder.Services.AddScoped<GameRepository>();
+builder.Services.AddAutoMapper(typeof(DTOToDomainMappingProfile));
 
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 

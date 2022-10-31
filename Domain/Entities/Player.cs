@@ -5,11 +5,13 @@ namespace Deck_of_Cards.Domain.Entities
     public sealed class Player
     {
         public int Id { get; private set; }
-        public Card[] Cards { get; set; }
+        public string Name { get; private set; }
+        public ICollection<Card> Cards { get; private set; }
         public int Points { get; private set; }
-
-        public Player()
+        
+        public Player(string name)
         {
+            Name = name;
             Cards = DrawFiveCardsFromANewDeck().Result;
             Points = SumPlayerPoints();
         }
@@ -31,6 +33,7 @@ namespace Deck_of_Cards.Domain.Entities
             {
                 PlayerPoints += ReturnCardValue(card.Value);
             }
+
             return PlayerPoints;
         }
 
@@ -40,7 +43,7 @@ namespace Deck_of_Cards.Domain.Entities
            if(valor == "JACK") return 11;
            if(valor == "QUEEN") return 12;
            if(valor == "KING") return 13;
-           return Int32.Parse(valor);
+           return int.Parse(valor);
         }
     }
 }
