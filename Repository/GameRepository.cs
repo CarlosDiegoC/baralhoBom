@@ -37,9 +37,20 @@ namespace Deck_of_Cards.Repository
 
             Player playerFour = await _context.Players.FindAsync(playerFourId);
             game.Players.Add(playerFour);
-
-            game.Winner = game.Players.OrderByDescending(player => player.Points).ToList()[0];
+        
             game.Date = DateTime.Now;
+
+            var drawVerify = game.Players.GroupBy(player => player.Points).Any(player => player.Count() > 1);
+
+            if(!drawVerify)
+            {
+                game.Winner = game.Players.OrderByDescending(player => player.Points).ToList()[0].Name;
+            }
+
+            else
+            {
+                game.Winner = "Draw.";
+            }
 
             _context.Games.Update(game);
             await _context.SaveChangesAsync();

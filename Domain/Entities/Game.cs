@@ -8,7 +8,7 @@ namespace Deck_of_Cards.Domain.Entities
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public ICollection<Player> Players { get; set; } = new HashSet<Player>();
-        public Player Winner { get; set; }
+        public string Winner { get; set; }
 
         public Game()
         {
